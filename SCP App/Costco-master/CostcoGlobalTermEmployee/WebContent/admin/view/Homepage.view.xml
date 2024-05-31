@@ -1,0 +1,73 @@
+<mvc:View controllerName="com.costco.admin.controller.Homepage"
+    xmlns:layout="sap.ui.layout" 
+    xmlns:l="sap.ui.layout" 
+    xmlns:f="sap.ui.layout.form"
+    xmlns:mvc="sap.ui.core.mvc" 
+    xmlns:ux="sap.uxap" 
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m" 
+    xmlns:html="http://www.w3.org/1999/xhtml" 
+    xmlns:semantic="sap.m.semantic"
+	xmlns:uxap="sap.uxap">
+
+	<semantic:FullscreenPage
+		title="{i18n>appTitle}" showNavButton="false" showFooter="false">
+		<semantic:content>
+			<!-- Proxy user select -->
+			<VBox class="sapUiSmallMargin">
+				<Title level="H1" text="Proxy" class="sapUiSmallMarginBegin"/>
+				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" 
+					header="{proxy>/user/defaultFullName}" 
+					subheader="{proxy>/user/userId}" 
+					headerImage="{proxy>/user/profilePhotoURL}"
+					press="onOpenEmployeeSearchDialog">
+					<TileContent footer="{proxy>/user/countryCode} Employee"/>
+				</GenericTile>
+			</VBox>
+			<!-- App Area-->
+			<VBox class="sapUiSmallMargin">
+				<Title level="H1" text="Apps" class="sapUiSmallMarginBegin"/>
+				<HBox visible="{= !${proxy>/isProxied} }">
+					<MessageStrip
+						text="Proxy as a terminated employee to view apps."
+						showIcon="true"
+						class="sapUiSmallMargin">
+					</MessageStrip>
+				</HBox>
+				<HBox visible="{proxy>/isProxied}">
+					<!-- App Tiles -->
+					<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" 
+						header="My Address"
+						subheader="View &amp; update address" 
+						press="onMyAddressClick">
+						<TileContent>
+							<ImageContent src="sap-icon://account" />
+						</TileContent>
+					</GenericTile>
+					<!-- AU Only -->
+					<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" 
+						header="My Pay Advices"
+						subheader="Display pay advice"
+						visible="{= ${proxy>/user/countryCode} === 'AUS' }"
+						press="onPayAdviceClick">
+						<TileContent>
+							<ImageContent src="sap-icon://customer-financial-fact-sheet" />
+						</TileContent>
+					</GenericTile>
+					<!-- CAN Only -->
+					<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" 
+						header="Pay/Rem Statement"
+						visible="{= ${proxy>/user/countryCode} === 'CAN' }"
+						press="onPayRemStatementClick">
+					</GenericTile>
+					<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" 
+						header="Tax Form"
+						visible="{= ${proxy>/user/countryCode} === 'CAN' }"
+						press="onTaxFormClick">
+					</GenericTile>
+				</HBox>
+			</VBox>
+		</semantic:content>
+	</semantic:FullscreenPage>
+
+</mvc:View>

@@ -1,0 +1,9 @@
+#Tue Jul 04 10:28:08 AEST 2018
+trustAll=true
+Name=sap_hcmcloud_core_odata_technical_user
+URL=https\://api4.successfactors.com
+ProxyType=Internet
+Type=HTTP
+Password=password01
+Authentication=BasicAuthentication
+User=username@costcoD1

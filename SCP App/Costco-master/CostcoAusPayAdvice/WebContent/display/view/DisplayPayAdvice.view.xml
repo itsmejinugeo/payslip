@@ -1,0 +1,105 @@
+<mvc:View controllerName="com.costco.au.display.controller.DisplayPayAdvice"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core" xmlns:semantic="sap.m.semantic" xmlns:ux="sap.uxap"
+	xmlns:layout="sap.ui.layout">
+	
+<html:div id="splash-screen" class="splash-screen-div">
+<html:div class="cube-wrapper">
+  <html:div class="cube-folding">
+    <html:span class="leaf1"></html:span>
+    <html:span class="leaf2"></html:span>
+    <html:span class="leaf3"></html:span>
+    <html:span class="leaf4"></html:span>
+  </html:div>
+  <html:span class="loading" data-name="Loading">Loading</html:span>
+</html:div>
+</html:div>
+
+	<semantic:FullscreenPage id="pageTwo"
+		showNavButton="false" title="My Pay Advices"
+		busy="{objectView>/busy}" busyIndicatorDelay="{objectView>/delay}" showFooter="false">
+			<semantic:content>
+	<ux:ObjectPageLayout id="ObjectPageLayout" 
+		alwaysShowContentHeader="true"
+		enableLazyLoading="false"
+		showTitleInHeaderContent="true"
+		visible="{display>/showApp}" >
+		<ux:headerTitle>
+			<ux:ObjectPageHeader id="objectHeader"
+				headerDesign="Light" 
+				objectImageURI="{/overview/profilePhotoURL}"
+				objectImageShape="Circle" 
+				objectImageAlt="{/overview/defaultFullName}"
+				objectTitle="{/overview/defaultFullName}"
+				objectSubtitle="{/overview/positionTitle}"
+				
+				isObjectSubtitleAlwaysVisible="false"
+				isObjectIconAlwaysVisible="false" 
+				isObjectTitleAlwaysVisible="false">
+			</ux:ObjectPageHeader>
+		</ux:headerTitle>
+
+		<ux:headerContent>
+			<layout:VerticalLayout>
+				<Label text="{/overview/department}"/>
+				<Label text="{/overview/location}"/>
+			</layout:VerticalLayout>
+		</ux:headerContent>
+
+		<ux:sections>
+			<ux:ObjectPageSection  id="payslipSection" title="Pay Advices ({display>/count})">
+				<ux:subSections>
+					<ux:ObjectPageSubSection title=""
+						mode="Expanded" id="payslipSubSection">
+						<ux:blocks>
+							<ux:ObjectPageLazyLoader stashed="true"
+								id="Section1stashed">
+								<Table id="payadvicetable" inset="false"
+									items="{path: '/overview/payadviceList', sorter: {path: 'effectiveStartDate', descending: true}}"
+									busyIndicatorDelay="{masterView>/delay}" noDataText="No pay advice found"
+									growing="true" growingScrollToLoad="true" visible="{display>/showApp}"
+									alternateRowColors="true">
+									<headerToolbar>
+										<Toolbar id="otb1">
+											<content>
+												<ToolbarSpacer></ToolbarSpacer>
+												<ToolbarSpacer></ToolbarSpacer>
+												<SearchField placeholder="Filter"
+													value="{display>/globalFilter}" search="filterGlobally"
+													width="15rem" />
+											</content>
+										</Toolbar>
+									</headerToolbar>
+									<columns>
+										<Column id="periodenddate" hAlign="Left" width="400px">
+											<Text text="Payroll Period End Date" />
+										</Column>
+										<Column minScreenWidth="Tablet" demandPopin="true"
+											hAlign="Left">
+											<Text text="Pay Advice" />
+										</Column>
+										<Column minScreenWidth="Tablet" demandPopin="true"
+											hAlign="Left">
+											<Text text="Filename" />
+										</Column>
+									</columns>
+									<items>
+										<ColumnListItem press="onListItemPress" type="Navigation">
+											<cells>
+												<ObjectIdentifier title="{inboxName}" text="{custPeriodEnd} " />
+												<Text text="{externalName}" />
+												<Text text="{filename}" />
+											</cells>
+										</ColumnListItem>
+									</items>
+								</Table>
+							</ux:ObjectPageLazyLoader>
+						</ux:blocks>
+					</ux:ObjectPageSubSection>
+				</ux:subSections>
+			</ux:ObjectPageSection>
+		</ux:sections>
+	</ux:ObjectPageLayout>
+			</semantic:content>
+	</semantic:FullscreenPage>
+</mvc:View>

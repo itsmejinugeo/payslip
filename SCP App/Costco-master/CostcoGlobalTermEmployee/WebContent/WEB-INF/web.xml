@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	id="WebApp_ID" version="3.0">
+	<display-name>Costco Terminated Employee Service</display-name>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/errors/404/404.html</location>
+	</error-page>
+	<error-page>
+		<error-code>403</error-code>
+		<location>/errors/403/403.html</location>
+	</error-page>
+
+	<resource-ref>
+		<res-ref-name>connectivityConfiguration</res-ref-name>
+		<res-type>com.sap.core.connectivity.api.configuration.ConnectivityConfiguration</res-type>
+	</resource-ref>
+
+	<!-- <resource-ref> -->
+	<!-- <res-ref-name>jdbc/DefaultDB</res-ref-name> -->
+	<!-- <res-type>javax.sql.DataSource</res-type> -->
+	<!-- </resource-ref> -->
+
+	<!-- Tenant Context needed to tell if running in cloud or locally -->
+	<resource-ref>
+		<res-ref-name>TenantContext</res-ref-name>
+		<res-type>com.sap.cloud.account.TenantContext</res-type>
+	</resource-ref>
+
+	<resource-ref>
+		<res-ref-name>authHeaderProvider</res-ref-name>
+		<res-type>com.sap.core.connectivity.api.authentication.AuthenticationHeaderProvider</res-type>
+	</resource-ref>
+
+	<resource-ref>
+		<res-ref-name>user/Provider</res-ref-name>
+		<res-type>com.sap.security.um.user.UserProvider</res-type>
+	</resource-ref>
+
+
+	<login-config>
+		<auth-method>FORM</auth-method>
+	</login-config>
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>Public Area</web-resource-name>
+			<url-pattern>/a/logout</url-pattern>
+			<url-pattern>/a/monitor</url-pattern>
+			<url-pattern>/index.html</url-pattern>
+			<url-pattern>/errors/*</url-pattern>
+		</web-resource-collection>
+	</security-constraint>
+
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>User Area</web-resource-name>
+			<url-pattern>/a/*</url-pattern>
+			<url-pattern>/address/*</url-pattern>
+			<url-pattern>/payadvice/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>Costco Terminated EE</role-name>
+			<role-name>Costco Terminated EE Admin</role-name>
+		</auth-constraint>
+	</security-constraint>
+	
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>Admin Area</web-resource-name>
+			<url-pattern>/a/admin/*</url-pattern>
+			<url-pattern>/admin/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>Costco Terminated EE Admin</role-name>
+		</auth-constraint>
+	</security-constraint>
+	
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>API doco</web-resource-name>
+			<url-pattern>/enunciate/*</url-pattern>
+			<url-pattern>/apidocs/*</url-pattern>
+			<url-pattern>/jsdoc/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>EC API</role-name>
+		</auth-constraint>
+	</security-constraint>
+
+	<security-role>
+		<description>API documentation access user</description>
+		<role-name>EC API</role-name>
+	</security-role>
+	
+	<security-role>
+		<description>Terminated Employee</description>
+		<role-name>Costco Terminated EE</role-name>
+	</security-role>
+	
+	<security-role>
+		<description>Terminated Employee</description>
+		<role-name>Costco Terminated EE Admin</role-name>
+	</security-role>
+</web-app>

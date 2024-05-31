@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+
+<title>Costco - Display Address</title>
+
+<script id="sap-ui-bootstrap"
+	src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js"
+	data-sap-ui-libs="sap.m" data-sap-ui-theme="sap_belize"
+	data-sap-ui-compatVersion="edge" data-sap-ui-language="en"
+	data-sap-ui-resourceroots='{"com.costco.address": ""}'>
+	
+</script>
+
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+
+<script>
+	sap.ui.getCore().attachInit(function() {
+		sap.ui.require([ "sap/m/Shell", "sap/ui/core/ComponentContainer" ], function() {
+			new sap.m.Shell({
+				app : new sap.ui.core.ComponentContainer({
+					height : "100%",
+					name : "com.costco.address"
+				})
+			}).placeAt("content");
+		});
+	});
+</script>
+</head>
+
+<body class="sapUiBody" id="content">
+</body>
+</html>

@@ -1,0 +1,6 @@
+#Wed Apr 26 09:56:09 AEST 2017
+URL=https\://performancemanager4.successfactors.com/eduPhoto/view?companyId\=CostcoQA3&photo_type\=liveProfile&user_id\=
+Name=user_photo
+ProxyType=Internet
+Type=HTTP
+Authentication=NoAuthentication

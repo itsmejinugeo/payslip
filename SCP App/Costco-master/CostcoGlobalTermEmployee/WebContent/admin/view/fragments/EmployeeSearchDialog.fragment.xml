@@ -1,0 +1,54 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+    <Dialog title="{i18n>employeeSearchDialogTitle}"
+        contentWidth="400px" contentHeight="500px">
+        <content>
+            <HBox alignItems="Center" width="100%" renderType="Bare">
+                <Input placeholder="{i18n>employeeSearchPlaceHolder}" 
+                    fieldGroupIds="EmpSearch,SearchInput"
+                    submit="onEmployeeNameSubmit"
+                    busyIndicatorDelay="0"
+                    width="90%"/>
+                <Button icon="sap-icon://search" tooltip="Search" 
+                    fieldGroupIds="EmpSearch,SearchButton"
+                    press="onSearchButtonClick"/>
+            </HBox>
+            <VBox>
+	            <Table noDataText="{i18n>txtNoData}"
+                    sticky="ColumnHeaders"
+                    growing="true" growingScrollToLoad="true" growingThreshold="50"
+	            	alternateRowColors="true"
+	            	items="{
+	            		path: 'employeeSearch>/', 
+	            		sorter: { path: 'countryCode'}
+	            	}" > 
+	                <columns>
+	                	<Column width="2rem">
+	                		<!-- Column for Icon -->
+	                	</Column>
+	                	<Column>
+	                		<Text text="{i18n>txtEmployee}"/>
+	                	</Column>
+	                	<Column width="6rem">
+	                		<Text text="{i18n>txtCountry}"/>
+	                	</Column>
+	                </columns>
+	                <items>
+		                <ColumnListItem type="Active" press="onEmployeeSelected">
+		                	<core:Icon src="{employeeSearch>profilePhotoURL}"/>
+		                	<VBox>
+			                	<Title text="{employeeSearch>defaultFullName}"/>
+			                	<Text text="{employeeSearch>userId}"/>
+		                	</VBox>
+		                	<Title text="{employeeSearch>countryCode}"/>
+		                </ColumnListItem>
+	                </items>
+	            </Table>
+            </VBox>
+        </content>
+        <endButton>
+            <Button text="{i18n>btnClose}" press="onCloseEmployeeSearchDialog"/>
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

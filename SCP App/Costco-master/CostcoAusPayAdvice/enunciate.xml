@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<enunciate xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://enunciate.webcohesion.com/schemas/enunciate-2.5.0.xsd">
+	<title>Costco Australia Pay Advice API</title>
+	<description>APIs used to manage data into and out of Costco Australia's pay advice application</description>
+	<contact email="c_weiwong@costco.com" name="Wei Wong" />
+	<application root="/a/" />
+	<modules>
+		<spring-web groupBy="class"></spring-web>
+		<jaxb disabled="true" />
+		<jackson disabled="true" />
+		<jackson1 disabled="true" />
+		<jaxws disabled="true" />
+		<jaxrs disabled="true" />
+		<docs docsDir="${project.build.directory}/docs"></docs>
+		<swagger docsSubdir="swagger" css="custom_swagger.css"></swagger>
+	</modules>
+
+
+</enunciate>

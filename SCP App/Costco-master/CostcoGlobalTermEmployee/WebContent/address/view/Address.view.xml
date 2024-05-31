@@ -1,0 +1,99 @@
+<mvc:View controllerName="com.costco.address.controller.Address"
+	xmlns:layout="sap.ui.layout" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form"
+	xmlns:mvc="sap.ui.core.mvc" xmlns:ux="sap.uxap" xmlns:core="sap.ui.core"
+	xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:semantic="sap.m.semantic"
+	xmlns:uxap="sap.uxap">
+
+	<html:div id="splash-screen" class="splash-screen-div">
+		<html:div class="cube-wrapper">
+			<html:div class="cube-folding">
+				<html:span class="leaf1"></html:span>
+				<html:span class="leaf2"></html:span>
+				<html:span class="leaf3"></html:span>
+				<html:span class="leaf4"></html:span>
+			</html:div>
+			<html:span class="loading" data-name="Loading">Loading</html:span>
+		</html:div>
+	</html:div>
+
+	<semantic:FullscreenPage id="pageTwo"
+		showNavButton="false" title="{i18n>appTitle}" busy="{objectView>/busy}"
+		busyIndicatorDelay="{objectView>/delay}" showFooter="false">
+		<semantic:content>
+			<ux:ObjectPageLayout id="ObjectPageLayout"
+				alwaysShowContentHeader="true" enableLazyLoading="false"
+				showTitleInHeaderContent="true" visible="{display>/showApp}">
+				<ux:headerTitle>
+					<ux:ObjectPageHeader id="objectHeader" headerDesign="Light"
+						objectImageShape="Circle" objectImageAlt="{overview>/defaultFullName}"
+						objectTitle="{overview>/defaultFullName} ({overview>/personIdExternal}) "
+						objectSubtitle="{i18n>pageHeaderSubTitle}" isObjectSubtitleAlwaysVisible="false"
+						isObjectIconAlwaysVisible="false" isObjectTitleAlwaysVisible="false">
+					</ux:ObjectPageHeader>
+				</ux:headerTitle>
+
+				<ux:sections>
+					<ux:ObjectPageSection id="addressSection"
+						title="{i18n>addressSectionTitle}">
+						<ux:subSections>
+							<ux:ObjectPageSubSection title="" mode="Expanded"
+								id="addressSubSection">
+								<ux:blocks>
+									<VBox class="sapUiSmallMargin">
+										<f:SimpleForm id="SimpleFormChange354" editable="true"
+											layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3"
+											labelSpanM="3" labelSpanS="12" adjustLabelSpan="false"
+											emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0"
+											columnsXL="1" columnsL="1" columnsM="1"
+											singleContainerFullSize="false">
+											<f:content>
+												<Label text="{i18n>formLabelAddress}" required="true" />
+												<Input value="{overview>/address/address1}" enabled="{display>/state}">
+												</Input>
+												<Label text="{i18n>formLabelCitySub}" required="true" />
+												<Input value="{overview>/address/city}" enabled="{display>/state}" />
+												<Label text="{i18n>formLabelPostCodeState}" required="true" />
+												<Input value="{overview>/address/zipcode}" enabled="{display>/state}">
+													<layoutData>
+														<l:GridData span="XL2 L1 M3 S4" />
+													</layoutData>
+												</Input>
+												<!-- <Input value="{overview>/address/state}" enabled="false" 
+													visible="{display>/editButtonVisible}"/> -->
+												<Select id="stateList" forceSelection="false"
+													selectedKey="{overview>/address/state}" enabled="{display>/state}"
+													change="handleStateSelect">
+													<core:Item key="{picklist>externalCode}" text="{picklist>label}" />
+												</Select>
+												<Label text="{i18n>formLableCountry}" required="true" />
+
+												<Select items="{picklist>/addressPicklist}"
+													forceSelection="false" id="countryList" change="handleCountrySelect"
+													selectedKey="{overview>/address/country}" enabled="{display>/state}">
+													<core:Item key="{picklist>code}" text="{picklist>countryName}" />
+												</Select>
+
+											</f:content>
+										</f:SimpleForm>
+
+										<OverflowToolbar id="otbFooter" class="sapUiMediumMarginTop">
+											<ToolbarSpacer />
+											<Button type="Emphasized" text="{i18n>btnEdit}"
+												visible="{display>/editButtonVisible}" press="handleEditPress" />
+											<Button text="{i18n>btnCancel}" visible="{display>/saveButtonVisible}"
+												press="handleCancelPress" />
+											<Button type="Emphasized" text="{i18n>btnSave}"
+												visible="{display>/saveButtonVisible}" press="handleSavePress" />
+										</OverflowToolbar>
+									</VBox>
+								</ux:blocks>
+							</ux:ObjectPageSubSection>
+						</ux:subSections>
+					</ux:ObjectPageSection>
+				</ux:sections>
+			</ux:ObjectPageLayout>
+		</semantic:content>
+	</semantic:FullscreenPage>
+
+
+</mvc:View>

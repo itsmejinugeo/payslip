@@ -1,0 +1,6 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<BusyDialog title="Loading Employee Pay Advices"
+		text="Fetching pay advices for {dialogTitle>/selectedEmployeeName} ({dialogTitle>/selectedEmployeeId})"
+		showCancelButton="false" />
+</core:FragmentDefinition>

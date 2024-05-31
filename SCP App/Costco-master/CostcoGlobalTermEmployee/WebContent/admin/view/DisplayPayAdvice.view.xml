@@ -1,0 +1,79 @@
+<mvc:View controllerName="com.costco.admin.controller.DisplayPayAdvice"
+	xmlns="sap.m" 
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:semantic="sap.m.semantic" 
+	xmlns:ux="sap.uxap"
+	xmlns:layout="sap.ui.layout"
+>
+	<semantic:FullscreenPage title="{i18n>payAdviceAppTitle}" 
+		showNavButton="true" navButtonPress="navToHomepage"
+		busy="{display>/busy}" busyIndicatorDelay="0" 
+		showFooter="false">
+		<semantic:content>
+			<ux:ObjectPageLayout alwaysShowContentHeader="true" 
+				enableLazyLoading="false" showTitleInHeaderContent="true">
+				<ux:headerTitle>
+					<ux:ObjectPageHeader headerDesign="Light" 
+						objectTitle="{/defaultFullName} ({/userId})" objectSubtitle="{i18n>txtInactive}" 
+						isObjectTitleAlwaysVisible="false" isObjectSubtitleAlwaysVisible="false"
+						objectImageURI="{/profilePhotoURL}" objectImageAlt="{/defaultFullName}" 
+						objectImageShape="Circle" isObjectIconAlwaysVisible="false" >
+					</ux:ObjectPageHeader>
+				</ux:headerTitle>
+
+				<ux:headerContent>
+					<layout:VerticalLayout>
+						<Label text="{/department}" />
+						<Label text="{/location}" />
+					</layout:VerticalLayout>
+				</ux:headerContent>
+
+				<ux:sections>
+					<ux:ObjectPageSection title="{i18n>txtPayAdvices}">
+						<ux:ObjectPageSubSection title="" mode="Expanded">
+							<Table id="payAdviceTable" 
+								noDataText="{i18n>txtNoPayAdviceFound}"
+								alternateRowColors="true" inset="false"
+								growing="true" growingScrollToLoad="true"
+								updateFinished="onPayAdviceTableUpdateFinished"
+								items="{
+									path: '/payadviceList', 
+									sorter: {path: 'effectiveStartDate', descending: true}
+								}">
+								<headerToolbar>
+									<Toolbar>
+										<ToolbarSpacer></ToolbarSpacer>
+										<SearchField placeholder="{i18n>txtFilter}"
+											search="updateFilter" width="15rem" />
+									</Toolbar>
+								</headerToolbar>
+								<columns>
+									<Column hAlign="Left" width="400px">
+										<Text text="{i18n>txtPayrollPeriodEndDate}" />
+									</Column>
+									<Column minScreenWidth="Tablet" demandPopin="true"
+										hAlign="Left">
+										<Text text="{i18n>txtPayAdvice}" />
+									</Column>
+									<Column minScreenWidth="Tablet" demandPopin="true"
+										hAlign="Left">
+										<Text text="{i18n>txtFileName}" />
+									</Column>
+								</columns>
+								<items>
+									<ColumnListItem press="onListItemPress" type="Navigation">
+										<cells>
+											<ObjectIdentifier title="{inboxName}" text="{custPeriodEnd}" />
+											<Text text="{externalName}" />
+											<Text text="{filename}" />
+										</cells>
+									</ColumnListItem>
+								</items>
+							</Table>
+						</ux:ObjectPageSubSection>
+					</ux:ObjectPageSection>
+				</ux:sections>
+			</ux:ObjectPageLayout>
+		</semantic:content>
+	</semantic:FullscreenPage>
+</mvc:View>

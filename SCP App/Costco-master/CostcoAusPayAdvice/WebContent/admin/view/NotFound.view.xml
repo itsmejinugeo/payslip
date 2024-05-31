@@ -1,0 +1,14 @@
+<mvc:View
+	controllerName="com.costco.au.admin.controller.NotFound"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m">
+
+	<MessagePage
+		title="{i18n>notFoundTitle}"
+		text="{i18n>notFoundText}"
+		icon="{sap-icon://document}"
+		id="page"
+		description="">
+	</MessagePage>
+
+</mvc:View>

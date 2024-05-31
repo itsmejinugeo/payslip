@@ -1,0 +1,49 @@
+<mvc:View controllerName="com.costco.au.admin.controller.SearchEmployee"
+	xmlns:html="http://www.w3.org/1999/xhtml" height="100%" xmlns:l="sap.ui.layout"
+	xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+	xmlns:semantic="sap.m.semantic">
+
+<html:div id="splash-screen" class="splash-screen-div">
+<html:div class="cube-wrapper">
+  <html:div class="cube-folding">
+    <html:span class="leaf1"></html:span>
+    <html:span class="leaf2"></html:span>
+    <html:span class="leaf3"></html:span>
+    <html:span class="leaf4"></html:span>
+  </html:div>
+  <html:span class="loading" data-name="Loading">Loading</html:span>
+</html:div>
+</html:div>
+
+	<semantic:FullscreenPage id="page"
+		title="Administrator: Display Employee Pay Advices" busy="{objectView>/busy}"
+		busyIndicatorDelay="{objectView>/delay}" visible="{display>/showApp}">
+
+		<semantic:content>
+			<VBox class="sapUiSmallMargin">
+				<List headerText="Search employee" id="idList" items="{/searchEmployeeList}"
+					selectionChange="onSelectionChange" noDataText="No employee found"
+					includeItemInSelection="true" growing="true" growingThreshold="20"
+					busyIndicatorDelay="500" enableBusyIndicator="true">
+					<headerToolbar>
+						<Toolbar>
+							<SearchField liveChange="handleEmployeeInput" width="50%" id="searchInput"
+								placeholder="Please enter employee name or employee number.." search="handleInputClear"
+								showSearchButton="false" />
+							<BusyIndicator id="searchIndicator" class="sapUiSmallMarginBottom"
+								visible="false" />
+						</Toolbar>
+					</headerToolbar>
+
+					<items>
+						<StandardListItem type="Navigation" press="onListItemPressed"
+							icon="sap-icon://employee" iconDensityAware="false" iconInset="true"
+							title="{defaultFullName} ({userId})">
+						</StandardListItem>
+					</items>
+				</List>
+			</VBox>
+
+		</semantic:content>
+	</semantic:FullscreenPage>
+</mvc:View>
